@@ -29,9 +29,15 @@ export const CreateComment = (props: Props) => {
   }
 
   return (
-    <Flex sx={{ flexDirection: 'column', gap: 3 }}>
-      <Flex data-target="create-comment-container">
-        <Box sx={{ lineHeight: 0, marginTop: 2, display: ['none', 'block'] }}>
+    <Flex sx={{ flexDirection: 'row', gap: 3 }}>
+      <Flex data-target="create-comment-container" sx={{ flexGrow: 1 }}>
+        <Box
+          sx={{
+            lineHeight: 0,
+            alignSelf: 'center',
+            display: ['none', 'block'],
+          }}
+        >
           <MemberBadge profileType={userProfileType} useLowDetailVersion />
         </Box>
         <Box
@@ -67,31 +73,33 @@ export const CreateComment = (props: Props) => {
                 placeholder={placeholder}
                 sx={{
                   background: 'none',
-                  resize: 'vertical',
-                  padding: 3,
+                  resize: 'none',
+                  cols: '2',
+                  font: 'body',
+                  fontSize: '1em',
                   '&:focus': {
                     borderColor: 'transparent',
                   },
                 }}
               />
-              <Text
-                sx={{
-                  fontSize: 2,
-                  position: 'absolute',
-                  right: 0,
-                  bottom: -5,
-                  pointerEvents: 'none',
-                  padding: 1,
-                }}
-              >
-                {comment.length}/{maxLength}
-              </Text>
+              {comment.length > 0 && (
+                <Text
+                  sx={{
+                    fontSize: 2,
+                    position: 'absolute',
+                    right: 0,
+                    bottom: 0,
+                    pointerEvents: 'none',
+                    padding: 1,
+                  }}
+                >
+                  {comment.length}/{maxLength}
+                </Text>
+              )}
             </>
           )}
         </Box>
-      </Flex>
 
-      <Flex sx={{ alignSelf: 'flex-end' }}>
         <Button
           data-cy={isReply ? 'reply-submit' : 'comment-submit'}
           disabled={!comment.trim() || !isLoggedIn || isLoading}
@@ -101,7 +109,9 @@ export const CreateComment = (props: Props) => {
               onSubmit(comment)
             }
           }}
-          sx={{ marginTop: isLoggedIn ? 3 : 0 }}
+          sx={{
+            alignSelf: 'flex-end',
+          }}
         >
           {isLoading ? 'Loading...' : buttonLabel}
         </Button>
