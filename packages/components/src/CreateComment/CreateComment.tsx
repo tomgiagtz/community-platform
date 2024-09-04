@@ -29,8 +29,11 @@ export const CreateComment = (props: Props) => {
   }
 
   return (
-    <Flex sx={{ flexDirection: 'row', gap: 3 }}>
-      <Flex data-target="create-comment-container" sx={{ flexGrow: 1 }}>
+    <Flex sx={{ flexDirection: 'column', gap: '15px' }}>
+      <Flex
+        data-target="create-comment-container"
+        sx={{ flexGrow: 1, gap: '15px' }}
+      >
         <Box
           sx={{
             lineHeight: 0,
@@ -38,23 +41,27 @@ export const CreateComment = (props: Props) => {
             display: ['none', 'block'],
           }}
         >
-          <MemberBadge profileType={userProfileType} useLowDetailVersion />
+          <MemberBadge
+            profileType={userProfileType}
+            useLowDetailVersion
+            size={42}
+          />
         </Box>
         <Box
           sx={{
             display: 'block',
             background: 'white',
             flexGrow: 1,
-            marginLeft: [2, 5],
+            marginLeft: 2,
             borderRadius: 1,
             position: 'relative',
             '&:before': {
               content: '""',
               position: 'absolute',
-              borderWidth: '1em 1em',
+              borderWidth: '0.75em 0.75em',
               borderStyle: 'solid',
               borderColor: 'transparent white transparent transparent',
-              margin: '1em -2em',
+              margin: '0.5em -1.5em',
             },
           }}
         >
@@ -72,11 +79,13 @@ export const CreateComment = (props: Props) => {
                 data-cy={isReply ? 'reply-form' : 'comments-form'}
                 placeholder={placeholder}
                 sx={{
+                  height: 42,
+                  paddingLeft: [3, 4],
                   background: 'none',
                   resize: 'none',
-                  cols: '2',
                   font: 'body',
                   fontSize: '1em',
+                  alignItems: 'center',
                   '&:focus': {
                     borderColor: 'transparent',
                   },
@@ -122,7 +131,14 @@ export const CreateComment = (props: Props) => {
 
 const LoginPrompt = () => {
   return (
-    <Box sx={{ padding: [3, 4] }}>
+    <Box
+      sx={{
+        padding: [3, 4],
+        height: 42,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
       <Text data-cy="comments-login-prompt">
         Hi there!{' '}
         <Link
